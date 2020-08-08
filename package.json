@@ -1,7 +1,7 @@
 {
-  "name": "Node-Stub",
+  "name": "user-authentication-service",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple User Authentication Service",
   "main": "index.js",
   "scripts": {
     "start": "nodemon bin/www.js"
