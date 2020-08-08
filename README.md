@@ -40,6 +40,8 @@
   "name" : "John David"
 }`
 
+  Update the current user information using User ID.
+
 A successful response will be
 
 200: `{ success: true, data: {} }` or `{ success: true, data: [] }`
