@@ -10,7 +10,7 @@ router.post('/login', async (req, res) => {
     return res.status(401).json({ success: false, error });
   }
   const token = users.auth.generateToken(userId);
-  return res.json({ success: true, token });
+  return res.json({ success: true, userId, token });
 });
 
 router.post('/signup', async (req, res) => {
@@ -18,8 +18,7 @@ router.post('/signup', async (req, res) => {
   if (!success) {
     return res.status(401).json({ success: false, error });
   }
-  const token = users.auth.generateToken(userId);
-  return res.json({ success: true, token });
+  return res.json({ success: true });
 });
 
 

@@ -1,5 +1,4 @@
 PORT=8000
-APP_DATABASE_NAME=assignment
-DB_USERNAME=username
-DB_PASSWORD=password
+APP_DATABASE_URL=localhost
+APP_DATABASE_NAME=node-env
 NODE_ENV=development

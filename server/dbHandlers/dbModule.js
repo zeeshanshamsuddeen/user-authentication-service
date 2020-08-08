@@ -1,5 +1,7 @@
 const usersModel = require('./models/users');
 
+const dbFunctions = require('./dbFunctions');
+
 const requiredDbFunctions = [
   'findOneAndUpdate',
   'addOne',

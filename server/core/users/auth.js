@@ -1,7 +1,4 @@
-const express = require('express');
-
 const config = require('../../config');
-const router = express.Router();
 const utils = require('../../shared/utils');
 const db = require('../../dbHandlers/dbModule');
 
@@ -15,7 +12,7 @@ const validateAuthFields = (updatedValues) => {
   for (let i = 0; i < requiredFieldsForSignUp.length; i++) {
     const field = requiredFieldsForSignUp[i];
     if (utils.common.checkObjectHasKey(updatedValues, field)) {
-      updateObject[field] = modifiedValues[field];
+      updateObject[field] = updatedValues[field];
     } else {
       error = `${field} missing`;
       success = false;
@@ -56,19 +53,12 @@ const registerUser = async (updatedValues) => {
 };
 
 const userLogin = async (loginDetails) => {
-  const validationResult = validateAuthFields(loginDetails);
-  const { success, updateObject, error } = validationResult;
-  if (!success) {
-    return { success: false, error }
-  }
-
   const { email, password } = loginDetails;
-  const { passwordDigest } = await db.users.findOneWithLean({ email });
+  const { passwordDigest, userId } = await db.users.findOneWithLean({ email });
   if (!utils.common.checkPassword(password, passwordDigest)) {
     return { success: false, error: 'Incorrect Password/Email' }
   }
-
-  return { success: true };
+  return { success: true, userId };
 }
 
 module.exports = {

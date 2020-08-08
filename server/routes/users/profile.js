@@ -1,8 +1,6 @@
 const express = require('express');
 
-const config = require('../../config');
 const router = express.Router();
-const utils = require('../../shared/utils');
 const db = require('../../dbHandlers/dbModule');
 const users = require('../../core/users');
 
@@ -12,7 +10,7 @@ router.get('/:id', async (req, res) => {
   return res.json({ success: true, user: userFromDb });
 });
 
-router.put('/update/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   const { id: userId } = req.params;
   const updateResponse = await users.profile.updateUser(userId, req.body);
   if (!updateResponse.success) {
