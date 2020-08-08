@@ -4,7 +4,7 @@ const router = express.Router();
 
 const { asyncRoute } = require('../../middlewares');
 const db = require('../../dbHandlers/dbModule');
-const users = require('../../core/users');
+const { updateUser } = require('../../core/users/profile');
 
 router.get('/:id', asyncRoute(async (req, res) => {
   const { id: userId } = req.params;
@@ -14,7 +14,7 @@ router.get('/:id', asyncRoute(async (req, res) => {
 
 router.put('/:id', asyncRoute(async (req, res) => {
   const { id: userId } = req.params;
-  const updateResponse = await users.profile.updateUser(userId, req.body);
+  const updateResponse = await updateUser(userId, req.body);
   if (!updateResponse.success) {
     return res.json({ success: false, error: updateResponse.error });
   }

@@ -9,7 +9,7 @@ const updateUser = async (userId, updatedValues) => {
   const requiredFields = ['name'];
   const updateObject = {};
 
-  for (let i = 0; i < requiredFields.length; i++) {
+  for (let i = 0; i < requiredFields.length; i += 1) {
     const field = requiredFields[i];
     if (utils.common.checkObjectHasKey(updatedValues, field)) {
       updateObject[field] = updatedValues[field];
@@ -17,13 +17,13 @@ const updateUser = async (userId, updatedValues) => {
   }
 
   await db.users.findOneAndUpdate({ userId }, updateObject);
-  return { success: true }
+  return { success: true };
 };
 
 
 module.exports = {
   updateUser,
-}
+};
 
 
 
