@@ -1,16 +1,17 @@
-const config = require('../../config');
-const utils = require('../../shared/utils');
-const db = require('../../dbHandlers/dbModule');
+const config = require('../config');
+const utils = require('../shared/utils');
+const db = require('../db/dbModule');
+const users = require('./users');
 
-const requiredFieldsForSignUp = ['name', 'password', 'email'];
+const requiredFieldsForAccount = ['password', 'email'];
 
 const validateAuthFields = (updatedValues) => {
   const updateObject = {};
   let success = true;
   let error;
 
-  for (let i = 0; i < requiredFieldsForSignUp.length; i += 1) {
-    const field = requiredFieldsForSignUp[i];
+  for (let i = 0; i < requiredFieldsForAccount.length; i += 1) {
+    const field = requiredFieldsForAccount[i];
     if (utils.common.checkObjectHasKey(updatedValues, field)) {
       updateObject[field] = updatedValues[field];
     } else {
@@ -36,7 +37,7 @@ const generateToken = (userId) => {
 };
 
 
-const registerUser = async (updatedValues) => {
+const register = async (updatedValues) => {
   const validationResult = validateAuthFields(updatedValues);
   const { success, updateObject, error } = validationResult;
   if (!success) {
@@ -44,17 +45,16 @@ const registerUser = async (updatedValues) => {
   }
 
   const userId = utils.common.getUUID();
-
   updateObject.userId = userId;
   updateObject.passwordDigest = utils.common.hashPassword(updateObject.password);
-  await db.users.addOne(updateObject);
-
+  await db.accounts.addOne(updateObject);
+  await users.createUser(userId, updatedValues);
   return { success: true };
 };
 
-const userLogin = async (loginDetails) => {
+const login = async (loginDetails) => {
   const { email, password } = loginDetails;
-  const { passwordDigest, userId } = await db.users.findOneWithLean({ email });
+  const { passwordDigest, userId } = await db.accounts.findOneWithLean({ email });
   if (!utils.common.checkPassword(password, passwordDigest)) {
     return { success: false, error: 'Incorrect Password/Email' };
   }
@@ -62,8 +62,8 @@ const userLogin = async (loginDetails) => {
 };
 
 module.exports = {
-  registerUser,
-  userLogin,
+  register,
+  login,
   generateToken,
 };
 
