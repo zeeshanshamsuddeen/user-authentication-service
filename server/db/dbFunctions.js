@@ -1,5 +1,7 @@
+const utils = require('../shared/utils');
 
-const findOneAndUpdate = (Model, queryObject, updateObject) => Model.findOneAndUpdate(queryObject, updateObject);
+const findOneAndUpdate = (Model, queryObject, updateObject) => Model
+  .findOneAndUpdate(queryObject, updateObject);
 
 const addOne = (Model, initObj) => {
   const createObject = new Model(initObj);
@@ -7,10 +9,12 @@ const addOne = (Model, initObj) => {
 };
 
 const add = async (Model, initList) => {
+  const promises = [];
   for (let i = 0; i < initList.length; i += 1) {
     const createObject = new Model(initList[i]);
-    await createObject.save();
+    promises.push(createObject.save());
   }
+  await utils.common.runFunctionsInParallel(promises);
 };
 
 const findOne = (Model, queryObject) => Model.findOne(queryObject);
@@ -19,13 +23,16 @@ const findOneWithLean = (Model, queryObject) => Model.findOne(queryObject).lean(
 
 const find = (Model, queryObject) => Model.find(queryObject);
 
-const findWithSkipLimitLean = (Model, queryObject, skipNumber, limitNumber) => Model.find(queryObject).sort({ name: 1 }).skip(skipNumber).limit(limitNumber).lean(true);
+const findWithSkipLimitLean = (Model, queryObject, skipNumber, limitNumber) => Model
+  .find(queryObject).sort({ name: 1 }).skip(skipNumber).limit(limitNumber)
+  .lean(true);
 
 const findWithLean = (Model, queryObject) => Model.find(queryObject).lean(true);
 
 const count = (Model, queryObject) => Model.count(queryObject);
 
-const findAndUpdate = (Model, queryObject, updateObject) => Model.updateMany(queryObject, updateObject);
+const findAndUpdate = (Model, queryObject, updateObject) => Model
+  .updateMany(queryObject, updateObject);
 
 const remove = (Model, queryObject) => Model.deleteMany(queryObject);
 
@@ -45,5 +52,3 @@ module.exports = {
   findAndUpdate,
   aggregate,
 };
-
-

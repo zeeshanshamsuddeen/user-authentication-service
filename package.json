@@ -4,7 +4,9 @@
   "description": "A simple User Authentication Service",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon bin/www.js"
+    "start": "nodemon bin/www.js",
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint:fix": "eslint --fix ."
   },
   "author": "Zeeshan",
   "license": "ISC",

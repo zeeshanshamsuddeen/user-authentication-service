@@ -10,5 +10,4 @@ const mongoOptions = {
 };
 mongoose.connect(`mongodb://${URL}/${NAME}`, mongoOptions);
 
-
 module.exports = mongoose;

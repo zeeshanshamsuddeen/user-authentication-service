@@ -4,7 +4,7 @@ const db = require('../db/dbModule');
 const getUser = async (userId) => {
   const userFromDb = await db.users.findOneWithLean({ userId });
   return { user: userFromDb };
-}
+};
 
 const requiredFields = ['firstName', 'lastName'];
 
@@ -35,15 +35,10 @@ const createUser = async (userId, updatedValues) => {
   }
   await db.users.addOne(updateObject);
   return { success: true };
-}
-
+};
 
 module.exports = {
   getUser,
   createUser,
   updateUser,
 };
-
-
-
-

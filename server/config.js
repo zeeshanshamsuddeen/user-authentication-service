@@ -1,4 +1,3 @@
-
 const config = {
   appDefaults: {
     PORT: process.env.PORT,

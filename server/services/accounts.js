@@ -36,7 +36,6 @@ const generateToken = (userId) => {
   return utils.token.generate(tokenData, secret, issuer, audience);
 };
 
-
 const register = async (updatedValues) => {
   const validationResult = validateAuthFields(updatedValues);
   const { success, updateObject, error } = validationResult;
@@ -66,8 +65,3 @@ module.exports = {
   login,
   generateToken,
 };
-
-
-
-
-

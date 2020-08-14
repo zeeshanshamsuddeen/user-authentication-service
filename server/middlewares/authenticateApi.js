@@ -5,7 +5,7 @@ module.exports = async (req, res, next) => {
   const authorizationHeader = req.headers.authorization;
   let token;
   if (authorizationHeader) {
-    token = authorizationHeader.split(' ')[1];
+    ([, token] = authorizationHeader.split(' '));
   }
 
   try {
@@ -21,7 +21,6 @@ module.exports = async (req, res, next) => {
 
     return next();
   } catch (error) {
-    console.log(error.name);
     return res.status(401).json({ error: 'Failed to authenticate' });
   }
 };

@@ -7,13 +7,11 @@ const { PORT } = config.appDefaults;
 
 const app = require('../server');
 
-app.set('port', PORT);
-
 const server = http.createServer(app);
 
 server.listen(PORT, (err) => {
   if (err) {
-    return console.log('error in listening port', err);
+    return err;
   }
-  console.log(`Now listening on port ${PORT}`);
+  return true;
 });

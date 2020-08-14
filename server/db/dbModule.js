@@ -24,7 +24,9 @@ const accountsDbFunctions = {};
 const createDbFunctions = () => {
   requiredDbFunctions.forEach((requiredFunc) => {
     usersDbFunctions[requiredFunc] = (...args) => dbFunctions[requiredFunc](usersModel, ...args);
-    accountsDbFunctions[requiredFunc] = (...args) => dbFunctions[requiredFunc](accountsModel, ...args);
+    accountsDbFunctions[requiredFunc] = (...args) => dbFunctions[requiredFunc](
+      accountsModel, ...args,
+    );
   });
 };
 

@@ -4,5 +4,3 @@ const asyncRoute = (fn) => (req, res, next) => {
 };
 
 module.exports = asyncRoute;
-
-
