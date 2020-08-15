@@ -1,6 +1,9 @@
-const asyncRoute = (fn) => (req, res, next) => {
-  Promise.resolve(fn(req, res, next))
-    .catch(next);
+const asyncRoute = (fn) => async (req, res, next) => {
+  try {
+    await fn(req, res, next);
+  } catch (error) {
+    res.status(500).send({ message: 'Internal Server Error' });
+  }
 };
 
 module.exports = asyncRoute;
