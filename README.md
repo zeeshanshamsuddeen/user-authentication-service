@@ -8,7 +8,7 @@
 
 ## APIs
 
-- `POST: /api/v1/users/auth/signup`
+- `POST: /api/v1/accounts/register`
 
   `payload:
 {
@@ -19,7 +19,7 @@
 
   Add a new user the database.
   
-- `POST: /api/v1/users/auth/login`
+- `POST: /api/v1/accounts/login`
 
   `payload:
 {
@@ -29,11 +29,11 @@
 
   Login to the service and generate a token.
 
-- `GET: /api/v1/users/profile/:id`
+- `GET: /api/v1/users/:id`
 
   Get the current user information using User ID.
 
-- `PUT: /api/v1/users/profile/:id`
+- `PUT: /api/v1/users/:id`
 
   `payload:
 {
