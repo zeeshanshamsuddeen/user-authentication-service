@@ -27,7 +27,7 @@
     "nodemon": "^1.19.1",
     "nonce": "^1.0.4",
     "uuid": "^3.3.3",
-    "validator": "^12.1.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "eslint": "^7.5.0",
